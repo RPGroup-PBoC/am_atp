@@ -1,4 +1,5 @@
 #%%
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -6,7 +7,7 @@ from skimage import io
 import active_matter_pkg as amp
 amp.viz.plotting_style()
 
-data_root = '../../data/atp/2021-06-10_Filter3_250ATP_mCherryiATP_1/'
+data_root = '../../data/atp/iatp/2021-06-10_Filter3_250ATP_mCherryiATP_1/'
 imset = amp.io.find_all_tiffs(data_root)
 # %%
 files_bright = np.sort([imname for imname in imset if '/Bright/' in imname])
