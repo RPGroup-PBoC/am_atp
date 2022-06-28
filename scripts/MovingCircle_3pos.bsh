@@ -37,7 +37,10 @@ runnable = new Runnable() {
       int roi = 1;
       int npos = 3;
       int globalCount = 0;
-      
+
+      int lag = 3;
+      int lag_temp = 0;
+
       int pos = 0;
       int initLength = 10; // cycles
 
@@ -56,11 +59,14 @@ runnable = new Runnable() {
          print("Activated slice " + roi);
 
 // initLength * npos
-        if ((globalCount >= 1) && (pos == 0)){
-            roi = roi + 1;
+        if ((globalCount >= (initLength * npos)) && (pos == 0)){
+            if (lag_temp == (lag - 1)){
+               roi = roi + 1;
+            }
         }
          
          globalCount = globalCount + 1;
+         lag_temp = (lag_temp + 1)%lag
       }
    };
 
