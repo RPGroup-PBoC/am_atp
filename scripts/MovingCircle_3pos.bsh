@@ -15,7 +15,7 @@ import ij.ImageStack; // To access stack pixels.
 // Load file from disk.
 Opener opener = new Opener();
 ImagePlus imp =
-opener.openImage("C:/Users/Aster/Documents/MergeMask10x_3pos.tif"); // "/path/to/stack.tif"
+opener.openImage("C:/Users/Aster/Documents/6_27_22_Circle.tif"); // "/path/to/stack.tif"
 
 // Get stack info.
 ImageStack stack = imp.getImageStack();
@@ -37,7 +37,10 @@ runnable = new Runnable() {
       int roi = 1;
       int npos = 3;
       int globalCount = 0;
-      
+
+      int lag = 3;
+      int lag_temp = 0;
+
       int pos = 0;
       int initLength = 10; // cycles
 
@@ -45,8 +48,8 @@ runnable = new Runnable() {
       print("Script Loaded");
       public void run() {
       
-         pos = globalcount%npos;
-         
+         pos = globalCount%npos;
+
          // Get the pixels of the stack slice.
          pixels = stack.getPixels(roi);
          // Upload the image to the SLM.
@@ -55,11 +58,15 @@ runnable = new Runnable() {
          mmc.displaySLMImage(mosaic);
          print("Activated slice " + roi);
 
-        if ((globalCount >= initLength * npos) && (pos == 0)){
-            roi = roi + 1;
+// initLength * npos
+        if ((globalCount >= (initLength * npos)) && (pos == 0)){
+            if (lag_temp == (lag - 1)){
+               roi = roi + 1;
+            }
         }
          
          globalCount = globalCount + 1;
+         lag_temp = (lag_temp + 1)%lag;
       }
    };
 
