@@ -1,0 +1,149 @@
+% Attempts to recapitulate aster formation
+% S. Hirokawa, October 2020
+
+set simul system
+{
+    time_step = 0.01
+    viscosity = 0.05
+    display = (
+        style = 2;
+        line_width = 3;
+        point_size = 2;
+    )
+}
+
+%geometry radius, low end, high end
+
+set space activated
+{
+    geometry = cylinderZ 5 0 10
+    display = (
+        visible = 1;
+    )
+}
+
+% because you don't want MT to go outside the boundary`
+
+set space hard_boundary
+{
+    geometry = cylinderZ 6 -1 11
+    display = (
+        visible=1;
+    )
+}
+
+% activate the spaces
+new space activated
+new space hard_boundary
+
+
+% define fibers - rigidity confine is the space it can go
+set fiber microtubule
+{
+    rigidity = 30
+    segmentation = 0.5
+    confine = inside, 100, hard_boundary
+    
+    min_length = 0.5
+    max_length = 5
+
+    activity = none
+
+    display = (
+        line_width = 2;
+        line_style = 1;
+    )
+}
+
+new 8000 microtubule
+{
+    length = 1.5
+    end_state = 0, 0
+}
+
+%hand to fiber interaction
+set hand kinesin
+{
+    binding_rate = 10
+    binding_range = 0.1
+    bind_also_end = 1
+
+    unbinding_rate = 0.5
+    unbinding_force = 3
+
+    activity = move
+    unloaded_speed = 0.8
+    stall_force = 6
+
+    display = ( 
+        size=8; 
+        color=blue;
+        width=7;
+    )
+}
+
+set hand dead_kinesin
+{
+    binding_rate = 10
+    binding_range = 0.1
+    bind_also_end = 1
+
+    unbinding_rate = 0.5
+    unbinding_force = 3
+
+    activity = bind
+
+    display = (
+        size=8;
+        color=red;
+        width=7;
+    )
+}
+
+% properties of connected motors together
+set couple ilid_micro
+{
+    hand1 = kinesin
+    hand2 = kinesin
+    activity = bridge
+
+    confine = inside
+    confine_space = activated
+
+    trans_activated = 1
+
+    diffusion = 10
+    fast_diffusion = 1
+    stiffness = 100
+    length = 0.08
+}
+
+new 30000 ilid_micro
+
+set couple dead_linkers
+{
+    hand1 = dead_kinesin
+    hand2 = dead_kinesin
+    activity = bridge
+
+    confine = inside
+    confine_space = activated
+
+    trans_activated = 1
+
+    diffusion = 10
+    fast_diffusion = 1
+    stiffness = 100
+    length = 0.08
+}
+
+new 5000 dead_linkers
+
+run 100000 simul *
+{
+    nb_frames = 2000
+}
+%report fiber:position report/fiber_position.txt
+%report fiber:intersection report/fiber_intersection.txt
+%report couple:ilid_micro report/couple_position.txt
+%report couple:force report/couple_force.txt
