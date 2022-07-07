@@ -29,14 +29,10 @@ acq.clearRunnables();
 runnable = new Runnable() {
       
       // constants
-      int npos = 3;
-      int framedelay = 10;
-      int nframes = 11;
+      int npos = 5;
 
       // variables
       int framenumber = 1;
-      int framecount = 0;
-      int positioncount = 0;
       
 		//Initialize state
       print("Script Loaded");
@@ -51,14 +47,8 @@ runnable = new Runnable() {
          mmc.displaySLMImage(mosaic);
          print("Activated slice " + framenumber);
 
-         positioncount = positioncount + 1;
-
-         if (positioncount%npos) == 0){
-            framecount = framecount + 1;
-            if (framecount%framedelay == 0){
-				   framenumber = (framenumber + 1) % nframes
-            }
-         }
+         framenumber = (framenumber + 1)%npos;
+         
       }
    };
 
