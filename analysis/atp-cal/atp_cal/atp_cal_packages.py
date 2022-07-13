@@ -176,7 +176,7 @@ def norm_mat_fn_iATP(im_ref, im_dark, r_blur=3):
     im_resized = skimage.transform.rescale(im, 1/rescale)
     
     # Median filter to remove hot pixels
-    im_median = skimage.filters.median(im_resized, skimage.morphology.selem.disk(10.0))
+    im_median = skimage.filters.median(im_resized, skimage.morphology.disk(10.0))
     
     # Gaussian blur the image
     im_blur = skimage.filters.gaussian(im_median, r_blur)
