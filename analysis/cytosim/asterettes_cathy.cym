@@ -1,0 +1,229 @@
+% Attempts to recapitulate aster formation
+% S. Hirokawa, October 2020
+
+%%%%%%%%%% GENERAL %%%%%%%%%%%%%%%
+% be ok w/ changing parameters-- want to see how certain processes going
+% hard to get contraction process-- unclear if it's a real set of parameters
+% .h files in course code have ok documentation
+
+% there's a menu if u right click
+% shift number
+
+% math dim.h, specify 1,2,3 dimensions
+% make clear
+% copy and pasting the executables
+
+%%%%%%%%%%%% SIMULATION %%%%%%%%%%%
+% docs in simul_prop.h
+% defining simulation environment
+
+set simul system
+{
+    time_step = 0.005 % 1/100th of a second
+    viscosity = 0.002 % common number
+
+    display = (
+        style = 2;
+        line_width = 3;
+        point_size = 2;
+    )
+}
+
+%%%%%%%%%%% SETTING SPACE %%%%%%%%%%%%
+% defining the two regions (inner space)
+% confine motors to dimerized inner circle
+% rotate against outer circle
+% space_prop.cc for documentation
+
+set space hard_boundary
+{
+    geometry = circle 8
+    display = (
+        visible=1;
+    )
+}
+
+set space activated
+{
+    geometry = circle 6
+    display = (
+        visible = 1;
+    )
+}
+
+%%%%%%%%%%%%%%%% FIBER %%%%%%%%%%%%%%%%
+% treats it as a bent centerline
+% if you notice filement starts to make kinks, divide by 2
+% define boundary it's confined in
+% docs under fiber.h
+
+
+set fiber microtubule
+{
+    rigidity = 30 % bending modulus
+    segmentation = 0.5 % voronoi length
+    confine = inside, 100, hard_boundary
+
+    min_length = 0.5 % don't rlly play a role HERE
+    max_length = 5 % you can also get distr/dynamic MTs
+
+    activity = none % you can specify whether MT grows or shrinks
+
+    display = (
+        line_width = 2;
+        line_style = 1;
+    )
+}
+
+% actually creating microtubules
+
+%%%%%%%%%%%%%%%% HANDS ????? bro %%%%%%%%%%%%%%%
+% hands ??????????
+% how contraction works:
+% - motors that walk ?
+% - motors that are non-functional ?
+
+% so that's why specify two hands: things that bind to filaments
+% less dead motors
+
+% check binding rates
+% check binding @ ends of MTs higher/lower than middle
+% unclear how we'd measure any of these things
+% a lil concerning that # of passive crosslinkers so much higher
+
+% largest space where one can change paramssszzzz
+% see rachel and tyler's paper for paramssszzzz
+
+
+
+set hand kinesin
+{
+    binding_rate = 10 % #/sec
+    binding_range = 0.1 % max distance from which can bind
+    bind_also_end = 1
+    % hold_growing_end = 1
+    
+    unbinding_rate = 0.77
+    unbinding_force = inf
+
+
+    activity = mighty
+    unloaded_speed = 2 % 800 nm/s, for K401 \approx 400-500 nm/s
+                         % more velocity than speed
+    stall_force = 6
+
+    display = (
+        size=8;
+        color=blue;
+        width=7;
+    )
+}
+
+
+
+set hand dead_kinesin
+{
+    binding_rate = 10
+    bind_only_end = plus_end
+    bind_end_range = 0.1
+    binding_range = 0.09
+
+    unbinding_rate = 0.2
+    unbinding_force = inf
+
+    activity = bind
+
+    display = (
+        size=8;
+        color=red;
+        width=7;
+    )
+}
+
+% figure out how to make single
+set couple ilid_micro
+{
+    hand1 = kinesin
+    hand2 = kinesin
+    activity = bridge
+
+    confine = inside
+    confine_space = activated
+
+    trans_activated = 1
+
+    diffusion = 1
+    % fast_diffusion = 1
+    stiffness = 20
+    length = 0.08
+}
+
+% initializing pairs
+
+% definitely mix these
+set couple dead_linkers
+{
+    hand1 = dead_kinesin
+    hand2 = dead_kinesin
+    activity = bridge
+
+    confine = inside
+    confine_space = activated
+
+    trans_activated = 1
+
+    diffusion = 1
+    % fast_diffusion = 1
+    stiffness = 20
+    length = 0.08
+}
+
+%%%%%%%%%%% ACTUALLY CREATING EVERYTHING %%%%%%%%%%%%
+
+new space hard_boundary
+new space activated
+
+new 10000 ilid_micro
+new 10000 dead_linkers
+
+% actually creating space after definition
+
+run 500 system
+{
+    nb_frames = 10
+
+}
+
+new 7000 microtubule
+{
+    length = 1
+    end_state = 0, 0
+}
+
+%%%%%%%%%% RUNNING SIM %%%%%%%%%%%
+
+repeat 100
+{
+	run 10 system
+	{
+	    nb_frames = 1
+	}
+	% report fiber:positions report.txt
+    new 200 ilid_micro
+    new 200 dead_linkers
+}
+
+%run 1000 system
+%{
+%    nb_frames = 200
+%}
+
+% run 10000 simul *
+% {
+%    nb_frames = 1000
+% }
+
+% report fiber:position report/fiber_position.csv
+% report fiber:intersection report/fiber_intersection.txt
+
+% report fiber:position > fiber_points.txt
