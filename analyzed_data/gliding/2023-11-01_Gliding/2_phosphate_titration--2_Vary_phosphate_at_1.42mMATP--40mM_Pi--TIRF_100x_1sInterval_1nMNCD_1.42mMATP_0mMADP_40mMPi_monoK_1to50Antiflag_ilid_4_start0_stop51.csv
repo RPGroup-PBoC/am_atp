@@ -1,0 +1,2 @@
+,index,area,major_axis_length,minor_axis_length,centroid-0,centroid-1,orientation,label,speed (nm/s),r^2,skele r^2,MT len (um),Motor Type,Motor_Conc_uM,MT_Conc_uM,ATP_Conc_uM,ADP_Conc_uM,P_Conc_uM,Flag_Conc_mg-ml,BSA_Caesin_Both,Acq_Time_s,Time_Interval_s,Cy5_exptime_ms,Cy5_gain,YFP_exptime_ms,YFP_gain,Temperature
+6,8,21,24.02424192914133,5.559528944826568,401.42857142857144,187.61904761904762,0.7768962593473193,33,80.49999999999986,0.8799999999999994,0.09523809523809423,2.6242588127918287,NCD_YFP_ilid,0.001,0.04,1420.0,0.0,40000.0,0.02,Both,100.0,1.0,60.0,300.0,100.0,4.0,
