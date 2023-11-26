@@ -202,3 +202,85 @@ def Langmuir_curve_fit(conc, calavg, maxconc, p0):
     curve = Langmuir(xvals, param[0], param[1], param[2])
     
     return param, curve, xvals
+
+def ATP_inten_to_conc(array, a, b, c, d):
+    return a * ((c - array) / (array - b)) ** (1/d)
+
+def expfunc(time, tau, Ao, Ainf):
+    return (Ao-Ainf)*np.exp(-time/tau) + Ainf
+def expfit(time, norm_conc, p0):
+    #Curve fits and returns parameter values as well as the covarience
+    param, param_cov = curve_fit(expfunc, 
+                                 time, 
+                                 norm_conc, 
+                                 p0, 
+                                 bounds = (np.zeros(3), np.ones([3])*np.inf))
+
+    #stores the new function information according to the coefficients given by curve-fit() function 
+    curve = expfunc(time, param[0], param[1], param[2])
+    
+    return param, curve
+
+def rsqrd(data, fit):
+    ssres = np.sum((data - fit)**2)
+    sstot = np.sum((data-np.average(data))**2)
+    return 1 - ssres/sstot
+
+def analyze_hydrolysis(bound_files, unbound_files, frame_int, skip_int, cal_params, p0, Motconc, bound_bg=1914, unbound_bg=1914):
+    """
+    test
+    """
+    
+    # Convert files to images and save as array:
+    bound_array = file_to_image(bound_files)
+    unbound_array = file_to_image(unbound_files)
+
+    #Subtract background from all calibration images
+    bound_bs = bound_array - bound_bg
+    unbound_bs = unbound_array - unbound_bg
+
+    #set negative values to zero
+    unbound_bs[unbound_bs<0] = 0
+    bound_bs[bound_bs<0] = 0
+    
+    #Find the normilization matrix
+    bound_norm_mat = norm_mat_fn_iATP(bound_array[-1], bound_bg)
+    unbound_norm_mat = norm_mat_fn_iATP(unbound_array[-1], unbound_bg)
+    
+    #Normalize all the calibration images by multiplying by the normalization matrix
+    bound_norm = bound_bs*bound_norm_mat
+    unbound_norm = unbound_bs*unbound_norm_mat
+    
+    #Average intensities
+    bound_hydro = np.average(bound_norm, axis=(1,2))
+    unbound_hydro = np.average(unbound_norm, axis=(1,2))
+    ratio_hydro = bound_hydro/unbound_hydro
+    
+    #define time
+    time = np.arange(0, len(ratio_hydro), 1)*frame_int*skip_int #s
+
+    #convert ratios to concentration values
+    ratio_concavg = ATP_inten_to_conc(ratio_hydro, cal_params[0],  cal_params[1],  cal_params[2],  cal_params[3])
+    
+    #Remove any nans
+    #find nans
+    nans = np.where(np.isnan(ratio_concavg)==True)
+
+    #remove
+    ratio_hydro_uM = np.delete(ratio_concavg, nans)
+    times = np.delete(time, nans)
+    
+    #Fit the exponential
+    params, curve = expfit(times, ratio_hydro_uM, p0)
+    
+    #Find r^2
+    e3 = np.where(ratio_hydro_uM >= (params[1]-params[2])/np.e**3)[-1][-1]
+    r2 = rsqrd(np.log(ratio_hydro_uM[:e3]), np.log(curve[:e3]))
+    
+    # Compute per motor hydrolysis rate
+    ATPsat = params[1]-params[2] #uM
+    Decay=params[0] #s
+    slope = ATPsat/Decay #uM/s
+    rate = ATPsat/Decay/Motconc
+    
+    return params, rate, r2
