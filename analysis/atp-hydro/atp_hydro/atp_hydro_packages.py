@@ -274,8 +274,8 @@ def analyze_hydrolysis(bound_files, unbound_files, frame_int, skip_int, cal_para
     params, curve = expfit(times, ratio_hydro_uM, p0)
     
     #Find r^2
-    e3 = np.where(ratio_hydro_uM >= (params[1]-params[2])/np.e**3)[-1][-1]
-    r2 = rsqrd(np.log(ratio_hydro_uM[:e3]), np.log(curve[:e3]))
+    e2 = np.where(ratio_hydro_uM-params[2] <= (params[1]-params[2])/np.e**2)[-1][0]
+    r2 = rsqrd(np.log(ratio_hydro_uM[:e2]-params[2]), np.log(curve[:e2]-params[2]))
     
     # Compute per motor hydrolysis rate
     ATPsat = params[1]-params[2] #uM
