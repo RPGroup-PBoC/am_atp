@@ -2,7 +2,9 @@ def my_test():
     print("Package is working!")
 
 #################### IMPORTS ####################
-    
+
+import time 
+
 # Numpy imports:
 import numpy as np
 
@@ -159,7 +161,7 @@ def norm_mat_fn_iATP(im_ref, im_dark, r_blur=3):
     # Scale up the normalization matrix to the original size
     norm_mat = skimage.transform.rescale(norm_mat, rescale)
     
-    return norm_mat
+    return np.array(norm_mat)
 
 
 def Langmuir(conc, a, b, c):
@@ -208,6 +210,7 @@ def ATP_inten_to_conc(array, a, b, c, d):
 
 def expfunc(time, tau, Ao, Ainf):
     return (Ao-Ainf)*np.exp(-time/tau) + Ainf
+
 def expfit(time, norm_conc, p0):
     #Curve fits and returns parameter values as well as the covarience
     param, param_cov = curve_fit(expfunc, 
@@ -218,8 +221,19 @@ def expfit(time, norm_conc, p0):
 
     #stores the new function information according to the coefficients given by curve-fit() function 
     curve = expfunc(time, param[0], param[1], param[2])
+
+    # print('exponential parameters ', param)
     
     return param, curve
+
+def linearfunc(x, m, c):
+    return m*x + c
+
+def linearfit(time, norm_conc):
+    # Use curve_fit to fit the linear function to the data
+    params, covariance = curve_fit(linearfunc,time, norm_conc)
+
+    return params
 
 def rsqrd(data, fit):
     ssres = np.sum((data - fit)**2)
@@ -228,39 +242,40 @@ def rsqrd(data, fit):
 
 def analyze_hydrolysis(bound_files, unbound_files, frame_int, skip_int, cal_params, p0, Motconc, bound_bg=1914, unbound_bg=1914):
     """
-    test
+        Analyzes tiff files
     """
-    
+
     # Convert files to images and save as array:
     bound_array = file_to_image(bound_files)
     unbound_array = file_to_image(unbound_files)
 
-    #Subtract background from all calibration images
+    # Subtract background from all calibration images
     bound_bs = bound_array - bound_bg
     unbound_bs = unbound_array - unbound_bg
 
-    #set negative values to zero
+    # set negative values to zero
     unbound_bs[unbound_bs<0] = 0
     bound_bs[bound_bs<0] = 0
     
-    #Find the normilization matrix
+    # Find the normilization matrix
     bound_norm_mat = norm_mat_fn_iATP(bound_array[-1], bound_bg)
     unbound_norm_mat = norm_mat_fn_iATP(unbound_array[-1], unbound_bg)
     
-    #Normalize all the calibration images by multiplying by the normalization matrix
+    # Normalize all the calibration images by multiplying by the normalization matrix
     bound_norm = bound_bs*bound_norm_mat
     unbound_norm = unbound_bs*unbound_norm_mat
     
-    #Average intensities
-    bound_hydro = np.average(bound_norm, axis=(1,2))
-    unbound_hydro = np.average(unbound_norm, axis=(1,2))
-    ratio_hydro = bound_hydro/unbound_hydro
+    # Average intensities
+    bound_hydro = np.mean(bound_norm, axis=(1,2))
+    unbound_hydro = np.mean(unbound_norm, axis=(1,2))
+    index = min(len(bound_hydro), len(unbound_hydro)); 
+    ratio_hydro = bound_hydro[:index]/unbound_hydro[:index]; 
     
     #define time
-    time = np.arange(0, len(ratio_hydro), 1)*frame_int*skip_int #s
+    time_array = np.arange(0, len(ratio_hydro), 1)*frame_int*skip_int; 
 
     #convert ratios to concentration values
-    ratio_concavg = ATP_inten_to_conc(ratio_hydro, cal_params[0],  cal_params[1],  cal_params[2],  cal_params[3])
+    ratio_concavg = ATP_inten_to_conc(ratio_hydro, cal_params[0],  cal_params[1],  cal_params[2],  cal_params[3]); 
     
     #Remove any nans
     #find nans
@@ -268,19 +283,72 @@ def analyze_hydrolysis(bound_files, unbound_files, frame_int, skip_int, cal_para
 
     #remove
     ratio_hydro_uM = np.delete(ratio_concavg, nans)
-    times = np.delete(time, nans)
+    times = np.delete(time_array, nans)
     
-    #Fit the exponential
-    params, curve = expfit(times, ratio_hydro_uM, p0)
-    
-    #Find r^2
-    e2 = np.where(ratio_hydro_uM-params[2] <= (params[1]-params[2])/np.e**2)[-1][0]
-    r2 = rsqrd(np.log(ratio_hydro_uM[:e2]-params[2]), np.log(curve[:e2]-params[2]))
-    
-    # Compute per motor hydrolysis rate
-    ATPsat = params[1]-params[2] #uM
-    Decay=params[0] #s
-    slope = ATPsat/Decay #uM/s
-    rate = ATPsat/Decay/Motconc
-    
-    return params, rate, r2
+    # Ratio should have atleast three points
+    if len(ratio_hydro_uM) > 3: 
+
+        # Find index after first 2 mins. This is where you will begin fitting.
+        two_min_index = np.where(times >= 120)[0][0]; 
+
+        # Find index where ATP conc is max, after first 2 mins.
+        start_index = two_min_index + np.where(ratio_hydro_uM[two_min_index:] == np.amax(ratio_hydro_uM[two_min_index:]))[0][0]; 
+
+        # If ATP value falls below certain % of max ATP concentration
+        if np.where(ratio_hydro_uM[start_index:] <= 0.75*np.amax(ratio_hydro_uM))[0] != []:
+            # Find index at which ATP conc reaches certain % of max value
+            end_index = np.where(ratio_hydro_uM[start_index:] <= 0.75*np.amax(ratio_hydro_uM))[0][0]; 
+        else: 
+            end_index = len(ratio_hydro_uM) - 1; 
+
+        if start_index + 1 < end_index:
+            linear_params = linearfit(times[start_index:end_index], ratio_hydro_uM[start_index:end_index])
+
+            #Find r^2 for linear fit
+            linear_r2 = rsqrd(
+                ratio_hydro_uM[start_index:end_index], 
+                linearfunc(times[start_index:end_index], linear_params[0], linear_params[1])
+                )
+            
+            # Store details of linear fitting
+            linear_data_regime = [times[start_index], times[end_index], len(ratio_hydro_uM[start_index:end_index])]; #start time, end time, number of points used.
+
+        else: 
+            linear_params = [np.nan, np.nan];  
+            linear_r2 = np.nan; 
+            linear_data_regime = [np.nan, np.nan, np.nan]; #start time, end time, number of points used.
+
+        # Try exponential fitting, set to nan if fitting fails
+        try:
+            exponential_fit_start_time = times[start_index]; 
+            exp_params, curve = expfit(times[start_index:], ratio_hydro_uM[start_index:], p0)
+
+            if np.all((np.where(ratio_hydro_uM-exp_params[2] <= (exp_params[1]-exp_params[2])/np.e**2)[-1]).size != 0):
+                exp_e2 = np.where(ratio_hydro_uM-exp_params[2] <= (exp_params[1]-exp_params[2])/np.e**2)[-1][0]; 
+                exp_r2 = rsqrd(np.log(ratio_hydro_uM[:exp_e2]-exp_params[2]), np.log(curve[:exp_e2]-exp_params[2])); 
+            else: 
+                exp_e2 = np.nan; 
+                exp_r2 = np.nan; 
+            
+            # Compute per motor hydrolysis rate
+            ATPsat = exp_params[1]-exp_params[2] #uM
+            Decay=exp_params[0] #s
+            slope = ATPsat/Decay #uM/s
+            rate = ATPsat/Decay/Motconc
+
+        except:
+            exp_params = [np.nan, np.nan, np.nan];  
+            rate = np.nan;  
+            exp_r2 = np.nan;  
+            exponential_fit_start_time = np.nan;  
+
+    else: 
+        linear_params = [np.nan, np.nan];  
+        linear_r2 = np.nan; 
+        exp_params = [np.nan, np.nan, np.nan];  
+        rate = np.nan;  
+        exp_r2 = np.nan;  
+        linear_data_regime = [np.nan, np.nan, np.nan]; #start time, end time, number of points used.
+        exponential_fit_start_time = np.nan; 
+
+    return linear_params, linear_r2, exp_params, rate, exp_r2, times, ratio_hydro_uM, ratio_hydro, bound_hydro, unbound_hydro, linear_data_regime, exponential_fit_start_time
