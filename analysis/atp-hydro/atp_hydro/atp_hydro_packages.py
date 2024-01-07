@@ -243,6 +243,17 @@ def rsqrd(data, fit):
 def analyze_hydrolysis(bound_files, unbound_files, frame_int, skip_int, cal_params, p0, Motconc, bound_bg=1914, unbound_bg=1914):
     """
         Analyzes tiff files
+
+        Input: 
+        bound_files:    List of location of tiff files of bound channel.
+        unbound_files:  List of location of tiff files of bound channel.
+        frame_int:      Frame Interval (in seconds).
+        skip_int:       Number of images to skip. Used for large datasets.
+        cal_params:     Callibration parameters [Km, Rmax (max ratio), Rmin (min ratio), n (exponent)]
+        p0:             Initial guess for fitting exponential curve to data.
+        Motconc:        Motor concentration used in experiments.
+        bound_bg:       Camera offset in tiff files for bound channel.
+        unbound_bg:     Camera offset in tiff files for unbound channel.
     """
 
     # Convert files to images and save as array:
@@ -257,7 +268,7 @@ def analyze_hydrolysis(bound_files, unbound_files, frame_int, skip_int, cal_para
     unbound_bs[unbound_bs<0] = 0
     bound_bs[bound_bs<0] = 0
     
-    # Find the normilization matrix
+    # Find the normalization matrix
     bound_norm_mat = norm_mat_fn_iATP(bound_array[-1], bound_bg)
     unbound_norm_mat = norm_mat_fn_iATP(unbound_array[-1], unbound_bg)
     
@@ -301,6 +312,7 @@ def analyze_hydrolysis(bound_files, unbound_files, frame_int, skip_int, cal_para
         else: 
             end_index = len(ratio_hydro_uM) - 1; 
 
+        # to do - remove this if statement? It shouldn't be necessary...
         if start_index + 1 < end_index:
             linear_params = linearfit(times[start_index:end_index], ratio_hydro_uM[start_index:end_index])
 
