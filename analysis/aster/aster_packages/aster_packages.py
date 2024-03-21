@@ -3,47 +3,47 @@ def my_test():
 
 #################### IMPORTS ####################
     
-# Numpy imports:
-import numpy as np
-
-#Scipy imports
-import scipy
-from scipy import optimize
-from scipy.optimize import curve_fit
-
-# for extracting filenames
+#for reading files
 import glob
 
-# skimage submodules we need
-import skimage.io
-import skimage.measure
-import skimage.filters
-import skimage.exposure
-import skimage.morphology
-from skimage.registration import phase_cross_correlation
-
-#Matplotlib imports
-import matplotlib.pyplot as plt
-from matplotlib.colors import Normalize
-import matplotlib.cm as cm
-
-# Seaborn imports (stylistic for nice plots)
-import seaborn as sns
-rc={'lines.linewidth': 2, 'axes.labelsize': 14, 'axes.titlesize': 14, \
-    'xtick.labelsize' : 14, 'ytick.labelsize' : 14}
-sns.set(style='ticks', rc=rc)
-
-# show images in viridis by default
-plt.rcParams['image.cmap'] = 'viridis'
-
-#for DataFrames
+#math computation and data organization
+import numpy as np
+import scipy
 import pandas as pd
 
-#To interact with the operating system
+# For loading bars
+from tqdm.notebook import tqdm as tqdm
+
+#For image plotting
+import skimage.io
+
+#For identifying aster center
+from skimage.filters import threshold_otsu, gaussian, threshold_mean
+from skimage.measure import regionprops
+import cv2
+
+#for fitting
+from lmfit import minimize, Parameters, fit_report
+
+#for image registration
+from skimage.registration import phase_cross_correlation
 import os
 
-#For status bar 
-from tqdm.notebook import tqdm as tqdm
+#Matplotlib plotting packages
+import matplotlib.pyplot as plt
+from matplotlib.colors import Normalize
+import matplotlib.colors as mcolors
+import matplotlib.cm as cm
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+from matplotlib import patches
+from matplotlib import gridspec
+
+#Movie
+import celluloid as cell
+import matplotlib.animation as animation
+
+#for saving data
+import csv
 
 
 
@@ -82,7 +82,7 @@ def file_sorter(file_list):
     
     return ordered_files
 
-
+#---------------------------------------------------------------------------------------
 
 def file_to_image(files):
     """
@@ -94,13 +94,14 @@ def file_to_image(files):
     Returns:
     An array of np.int16 images
     """
-    im_list=list()
+    im_list = list()
     for file in files:
         im = skimage.io.imread(file)
         im_list.append(im.astype(np.int16))
-    
+
     return np.array(im_list)
 
+#---------------------------------------------------------------------------------------
 
 def binary_im_generator(im_for_binary, percentile = 80):
     """
