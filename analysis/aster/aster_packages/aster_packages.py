@@ -103,36 +103,42 @@ def file_to_image(files):
 
 #---------------------------------------------------------------------------------------
 
-def binary_im_generator(im_for_binary, percentile = 80):
+def binary_im_generator(im_for_binary, plot=True):
     """
-    Creates an image of ones for values above a threshold and zeros for all others. 
-    This is essentially a mask. The image is the same size as the inputted image.
+    Uses Otsu Thresholding to create a mask the same size as the inputted image. Pixels above the threshold will be set to 1's and pixels below the threshold will be set to 0's. Otsu thresholding is used due to its ability to separate foreground from background. This is convenient here as ATP images have sharp circular boundaries. 
     
     Parameters:
     im_for_binary: image you wish to create a mask from
-    percentile: uses the np.percentile function which thresholds above 
-                the given percentile. Automatically set to 80
+    plot=True: if True will plot the original image with 
                 
     Returns:
-    A binary image to be used as a mask
+   im_binary: A binary image to be used as a mask
+   center: (x,y) values of the circular mask center
+   radius: radius of the mask
     """
     
-    im_binary = im_for_binary > np.percentile(im_for_binary, percentile)
+    # Create the binary image:
+    im_binary = (im_for_binary > threshold_otsu(im_for_binary)).astype(np.uint8)
     
-    #plot the figures
-    fig, (ax0, ax1) = plt.subplots(1,2,figsize=(16,8))
-
-    loc0 = ax0.imshow(im_for_binary)
-    fig.colorbar(loc0, ax=ax0, shrink = 0.5)
-    ax0.set_title("inputted image")
-    ax0.grid(False)
-
-    loc1 = ax1.imshow(im_binary, cmap = plt.cm.Greys_r)
-    fig.colorbar(loc1, ax=ax1, shrink = 0.5)
-    ax1.set_title("binary image")
-    ax1.grid(False)
+    # Find the circular contour of the binary image
+    contours, hierarchy = cv2.findContours(im_binary, 1, 2)
+    for j, contour in enumerate(contours):
+        area = cv2.contourArea(contour)
+        if area > 1:
+            max_area = area
+            max_index = j
     
-    return im_binary
+    # Save the center and radius values
+    (x, y), radius = cv2.minEnclosingCircle(contours[max_index])
+    
+    # If true plot the figure - original figure with surrounding contour circle
+    if plot==True:
+         fig,ax=plt.subplots()
+         ax.imshow(im_for_binary, vmin=1900, vmax=np.percentile(im_for_binary,99.9))
+         circle1 = plt.Circle((x, y), radius, fill=False, color='r')
+         ax.add_patch(circle1)
+    
+    return im_binary, (x,y), radius
 
 
 def norm_mat_fn_iATP(im_ref, im_dark, r_blur=3):
