@@ -206,7 +206,12 @@ def Langmuir_curve_fit(conc, calavg, maxconc, p0):
     return param, curve, xvals
 
 def ATP_inten_to_conc(array, a, b, c, d):
-    return a * ((c - array) / (array - b)) ** (1/d)
+    epsilon = 1e-10  # Small constant to avoid division by zero
+    result = a * np.power(((c - array) / (array - b + epsilon)),(1/d), dtype=np.float128)
+    result = np.clip(result, np.finfo(result.dtype).min, np.finfo(result.dtype).max)
+    return result
+
+#     return a * ((c - array) / (array - b)) ** (1/d)
 
 def expfunc(time, tau, Ao, Ainf):
     return (Ao-Ainf)*np.exp(-time/tau) + Ainf
@@ -255,10 +260,13 @@ def analyze_hydrolysis(bound_files, unbound_files, frame_int, skip_int, cal_para
         bound_bg:       Camera offset in tiff files for bound channel.
         unbound_bg:     Camera offset in tiff files for unbound channel.
     """
+    print("start")
+
+    max_index = 100; 
 
     # Convert files to images and save as array:
-    bound_array = file_to_image(bound_files)
-    unbound_array = file_to_image(unbound_files)
+    bound_array = file_to_image(bound_files[:max_index])
+    unbound_array = file_to_image(unbound_files[:max_index])
 
     # Subtract background from all calibration images
     bound_bs = bound_array - bound_bg
@@ -281,6 +289,17 @@ def analyze_hydrolysis(bound_files, unbound_files, frame_int, skip_int, cal_para
     unbound_hydro = np.mean(unbound_norm, axis=(1,2))
     index = min(len(bound_hydro), len(unbound_hydro)); 
     ratio_hydro = bound_hydro[:index]/unbound_hydro[:index]; 
+
+    print("before")
+    print(bound_norm.shape)
+    # Calculate standard deviation in ratio for each image
+    total_ratio = bound_norm[:100, :, :]/unbound_norm[:100, :, :]; 
+    ratio_hydro_std = np.std(total_ratio, axis = (1, 2)); 
+    print("after")
+
+    # Calculate std in atp for each image
+    total_atp = ATP_inten_to_conc(total_ratio, cal_params[0],  cal_params[1],  cal_params[2],  cal_params[3]); 
+    atp_std = np.nanstd(total_atp, axis = (1, 2)); 
     
     #define time
     time_array = np.arange(0, len(ratio_hydro), 1)*frame_int*skip_int; 
@@ -306,7 +325,7 @@ def analyze_hydrolysis(bound_files, unbound_files, frame_int, skip_int, cal_para
         start_index = two_min_index + np.where(ratio_hydro_uM[two_min_index:] == np.amax(ratio_hydro_uM[two_min_index:]))[0][0]; 
 
         # If ATP value falls below certain % of max ATP concentration
-        if np.where(ratio_hydro_uM[start_index:] <= 0.75*np.amax(ratio_hydro_uM))[0] != []:
+        if len(np.where(ratio_hydro_uM[start_index:] <= 0.75*np.amax(ratio_hydro_uM))[0]) != 0:
             # Find index at which ATP conc reaches certain % of max value
             end_index = np.where(ratio_hydro_uM[start_index:] <= 0.75*np.amax(ratio_hydro_uM))[0][0]; 
         else: 
@@ -363,4 +382,4 @@ def analyze_hydrolysis(bound_files, unbound_files, frame_int, skip_int, cal_para
         linear_data_regime = [np.nan, np.nan, np.nan]; #start time, end time, number of points used.
         exponential_fit_start_time = np.nan; 
 
-    return linear_params, linear_r2, exp_params, rate, exp_r2, times, ratio_hydro_uM, ratio_hydro, bound_hydro, unbound_hydro, linear_data_regime, exponential_fit_start_time
+    return linear_params, linear_r2, exp_params, rate, exp_r2, times, ratio_hydro_uM, atp_std, ratio_hydro, ratio_hydro_std, bound_hydro, unbound_hydro, linear_data_regime, exponential_fit_start_time
