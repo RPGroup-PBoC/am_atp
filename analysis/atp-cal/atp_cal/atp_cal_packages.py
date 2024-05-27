@@ -30,7 +30,7 @@ import matplotlib.cm as cm
 # Seaborn imports (stylistic for nice plots)
 import seaborn as sns
 rc={'lines.linewidth': 2, 'axes.labelsize': 14, 'axes.titlesize': 14, \
-    'xtick.labelsize' : 14, 'ytick.labelsize' : 14}
+    'xtick.labelsize' : 14, 'ytick.labelsize' : 14, }
 sns.set(style='ticks', rc=rc)
 
 # show images in viridis by default
