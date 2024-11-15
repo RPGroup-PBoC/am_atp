@@ -1,0 +1,407 @@
+{
+"Summary": {
+  "Slices": 1,
+  "InitialPositionList": [
+    {
+      "DeviceCoordinatesUm": {
+        "ZStage": [394.3],
+        "XYStage": [
+          -30216,
+          -3118
+        ]
+      },
+      "GridColumnIndex": 0,
+      "Label": "Pos0",
+      "GridRowIndex": 0
+    },
+    {
+      "DeviceCoordinatesUm": {
+        "ZStage": [394.3],
+        "XYStage": [
+          -24898,
+          -2544
+        ]
+      },
+      "GridColumnIndex": 0,
+      "Label": "Pos1",
+      "GridRowIndex": 0
+    },
+    {
+      "DeviceCoordinatesUm": {
+        "ZStage": [394.3],
+        "XYStage": [
+          -19074,
+          -3488
+        ]
+      },
+      "GridColumnIndex": 0,
+      "Label": "Pos2",
+      "GridRowIndex": 0
+    },
+    {
+      "DeviceCoordinatesUm": {
+        "ZStage": [394.3],
+        "XYStage": [
+          -7810,
+          -4255
+        ]
+      },
+      "GridColumnIndex": 0,
+      "Label": "Pos3",
+      "GridRowIndex": 0
+    },
+    {
+      "DeviceCoordinatesUm": {
+        "ZStage": [394.3],
+        "XYStage": [
+          -2133,
+          -4401
+        ]
+      },
+      "GridColumnIndex": 0,
+      "Label": "Pos4",
+      "GridRowIndex": 0
+    },
+    {
+      "DeviceCoordinatesUm": {
+        "ZStage": [394.3],
+        "XYStage": [
+          3548,
+          -4987
+        ]
+      },
+      "GridColumnIndex": 0,
+      "Label": "Pos5",
+      "GridRowIndex": 0
+    }
+  ],
+  "Interval_ms": 0,
+  "UUID": "9f3d9915-815a-40de-96a1-e538871ec4ae",
+  "UserName": "Aster",
+  "Depth": 2,
+  "PixelType": "GRAY16",
+  "Time": "2021-01-13 18:22:48 -0800",
+  "Date": "2021-01-13",
+  "z-step_um": 0,
+  "MetadataVersion": 10,
+  "PositionIndex": 4,
+  "SlicesFirst": true,
+  "ChContrastMin": [0],
+  "Width": 1920,
+  "PixelAspect": 1,
+  "MicroManagerVersion": "1.4.23 20180708",
+  "ROI": [
+    0,
+    0,
+    1920,
+    1200
+  ],
+  "ChNames": ["Proj_GFP"],
+  "IJType": 1,
+  "GridRow": 0,
+  "Comment": "Standard EM, 1ul 1;1iATP, 2ul M2B 6.8 pad\npos0:1410uM ATP\npos1:470uM ATP\npos2:157uM ATP\npos3:52uM ATP\npos4: 17uM ATP\npos5:0uM ATP",
+  "Height": 1200,
+  "GridColumn": 0,
+  "Prefix": "2021-01-13_nocamera_dark_1",
+  "PixelSize_um": 0.2942,
+  "Frames": 1,
+  "CameraTimeout": 20000,
+  "BitDepth": 16,
+  "KeepShutterOpenChannels": false,
+  "Source": "Micro-Manager",
+  "Channels": 1,
+  "ComputerName": "DESKTOP-29GP4P3",
+  "CustomIntervals_ms": [],
+  "KeepShutterOpenSlices": true,
+  "ChColors": [-256],
+  "TimeFirst": false,
+  "ChContrastMax": [65536],
+  "Positions": 6,
+  "Directory": "E:\\"
+},
+"FrameKey-0-0-0": {
+  "Blackfly BFLY-U3-23S6M_17290364-Firmware Build Time": "Wed Mar 18 21:57:34 2015",
+  "Core-Focus": "ZStage",
+  "GenericSLM-Inversion": "Off",
+  "Channel": "Proj_GFP",
+  "Core-Initialize": "1",
+  "ZStage-SCurve": "99",
+  "COM1-Verbose": "0",
+  "Blackfly BFLY-U3-23S6M_17290364-Sharpness-OnOff": "On",
+  "COM7-AnswerTimeout": "500.0000",
+  "TE2000-Description": "Nikon TE2000 hub",
+  "FilterBlock-Label": "GFP",
+  "COM7-Handshaking": "Off",
+  "FrameIndex": 0,
+  "Blackfly BFLY-U3-23S6M_17290364-TriggerMode": "Software",
+  "COM1-Description": "Serial port driver (boost:asio)",
+  "COM8-Name": "COM8",
+  "Blackfly BFLY-U3-23S6M_17290364-Description": "",
+  "ZStage-Name": "ZStage",
+  "ROI": "0-0-1920-1200",
+  "Blackfly BFLY-U3-23S6M_17290364-CameraID": "17290364",
+  "COM1-AnswerTimeout": "8000.0000",
+  "Camera": "",
+  "Blackfly BFLY-U3-23S6M_17290364-CameraName": "Blackfly BFLY-U3-23S6M",
+  "Arduino-Shutter-Name": "Arduino-Shutter",
+  "GenericSLM-TestModeWidth": "1280",
+  "XYStage-StepSizeX_um": "1.0000",
+  "ZStage-Port": "COM7",
+  "Core-ImageProcessor": "",
+  "Blackfly BFLY-U3-23S6M_17290364-Format-7 Mode": "Mode-7",
+  "Arduino-Hub-Version": "2",
+  "SlicePosition": null,
+  "Blackfly BFLY-U3-23S6M_17290364-IIDC version": "1.32",
+  "Exposure-ms": 50,
+  "XYStage-StepSizeY_um": "1.0000",
+  "Blackfly BFLY-U3-23S6M_17290364-TransposeMirrorY": "0",
+  "COM1-DataBits": "8",
+  "Blackfly BFLY-U3-23S6M_17290364-TransposeMirrorX": "0",
+  "COM7-Description": "Serial port driver (boost:asio)",
+  "TE2000-ModelType": "0",
+  "Core-AutoShutter": "1",
+  "COM7-DelayBetweenCharsMs": "0.0000",
+  "Arduino-Switch-State": "0",
+  "COM7-Parity": "None",
+  "GenericSLM-GraphicsPort": "\\\\.\\DISPLAY4",
+  "NextFrame": 0,
+  "GenericSLM-MonochromeColor": "White",
+  "Core-XYStage": "XYStage",
+  "AxisPositions": null,
+  "COM8-Parity": "None",
+  "Blackfly BFLY-U3-23S6M_17290364-Trigger Delay(s)": "0.0000",
+  "ZStage-MaxSpeed": "19",
+  "Time": "2021-01-13 18:22:48 -0800",
+  "COM7-Verbose": "0",
+  "COM1-Parity": "None",
+  "Arduino-Switch-Blank On": "Low",
+  "Blackfly BFLY-U3-23S6M_17290364-Temperature(C)": "42.3500",
+  "XYStage-Port": "COM7",
+  "Blackfly BFLY-U3-23S6M_17290364-Binning": "1",
+  "Core-AutoFocus": "",
+  "COM1-StopBits": "1",
+  "COM7-StopBits": "1",
+  "XYStage-MaxSpeed": "100",
+  "Blackfly BFLY-U3-23S6M_17290364-Sensor Resolution": "1920x1200",
+  "COM8-DelayBetweenCharsMs": "0.0000",
+  "BitDepth": 16,
+  "Slice": 0,
+  "COM3-AnswerTimeout": "500.0000",
+  "FilterBlock-State": "1",
+  "COM8-AnswerTimeout": "500.0000",
+  "Blackfly BFLY-U3-23S6M_17290364-Color or Monochrome": "MonoChrome",
+  "ChannelIndex": 0,
+  "Arduino-Switch-Label": "Proj_470nm",
+  "COM3-Handshaking": "Off",
+  "Blackfly BFLY-U3-23S6M_17290364-Interface Type": "USB3",
+  "Core-Shutter": "Arduino-Shutter",
+  "Blackfly BFLY-U3-23S6M_17290364-Trigger Delay-OnOff": "Off",
+  "COM7-BaudRate": "9600",
+  "UUID": "c336ae90-fc6d-424c-80ec-ac4271899c9d",
+  "Core-Camera": "Blackfly BFLY-U3-23S6M_17290364",
+  "Core-TimeoutMs": "5000",
+  "Core-SLM": "GenericSLM",
+  "FilterBlock-Name": "FilterBlock",
+  "TE2000-Version": "V2.50-V2.50",
+  "ZStage-Description": "Prior Z-stage driver adapter",
+  "ElapsedTime-ms": 8556,
+  "GenericSLM-Name": "GenericSLM",
+  "Arduino-Switch-Blanking Mode": "Off",
+  "TE2000-Name": "TE2000",
+  "COM1-Handshaking": "Off",
+  "Arduino-Shutter-Description": "Arduino shutter driver",
+  "Blackfly BFLY-U3-23S6M_17290364-Use Advanced Mode?": "Yes",
+  "Frame": 0,
+  "Core-ChannelGroup": "Channel",
+  "PositionIndex": 4,
+  "Width": 1920,
+  "FilterBlock-Description": "Nikon TE2000 filter block changeover adapter",
+  "WaitInterval": null,
+  "COM3-StopBits": "1",
+  "PositionName": "Pos4",
+  "PixelSizeUm": 0.2942,
+  "Blackfly BFLY-U3-23S6M_17290364-Gain-AutoOrManual": "Manual",
+  "Height": 1200,
+  "COM3-Verbose": "1",
+  "Summary": {
+    "Slices": 1,
+    "InitialPositionList": [
+      {
+        "DeviceCoordinatesUm": {
+          "ZStage": [394.3],
+          "XYStage": [
+            -30216,
+            -3118
+          ]
+        },
+        "GridColumnIndex": 0,
+        "Label": "Pos0",
+        "GridRowIndex": 0
+      },
+      {
+        "DeviceCoordinatesUm": {
+          "ZStage": [394.3],
+          "XYStage": [
+            -24898,
+            -2544
+          ]
+        },
+        "GridColumnIndex": 0,
+        "Label": "Pos1",
+        "GridRowIndex": 0
+      },
+      {
+        "DeviceCoordinatesUm": {
+          "ZStage": [394.3],
+          "XYStage": [
+            -19074,
+            -3488
+          ]
+        },
+        "GridColumnIndex": 0,
+        "Label": "Pos2",
+        "GridRowIndex": 0
+      },
+      {
+        "DeviceCoordinatesUm": {
+          "ZStage": [394.3],
+          "XYStage": [
+            -7810,
+            -4255
+          ]
+        },
+        "GridColumnIndex": 0,
+        "Label": "Pos3",
+        "GridRowIndex": 0
+      },
+      {
+        "DeviceCoordinatesUm": {
+          "ZStage": [394.3],
+          "XYStage": [
+            -2133,
+            -4401
+          ]
+        },
+        "GridColumnIndex": 0,
+        "Label": "Pos4",
+        "GridRowIndex": 0
+      },
+      {
+        "DeviceCoordinatesUm": {
+          "ZStage": [394.3],
+          "XYStage": [
+            3548,
+            -4987
+          ]
+        },
+        "GridColumnIndex": 0,
+        "Label": "Pos5",
+        "GridRowIndex": 0
+      }
+    ],
+    "Interval_ms": 0,
+    "UUID": "9f3d9915-815a-40de-96a1-e538871ec4ae",
+    "UserName": "Aster",
+    "Depth": 2,
+    "PixelType": "GRAY16",
+    "Time": "2021-01-13 18:22:48 -0800",
+    "Date": "2021-01-13",
+    "z-step_um": 0,
+    "MetadataVersion": 10,
+    "PositionIndex": 4,
+    "SlicesFirst": true,
+    "ChContrastMin": [0],
+    "Width": 1920,
+    "PixelAspect": 1,
+    "MicroManagerVersion": "1.4.23 20180708",
+    "ROI": [
+      0,
+      0,
+      1920,
+      1200
+    ],
+    "ChNames": ["Proj_GFP"],
+    "IJType": 1,
+    "GridRow": 0,
+    "Comment": "Standard EM, 1ul 1;1iATP, 2ul M2B 6.8 pad\npos0:1410uM ATP\npos1:470uM ATP\npos2:157uM ATP\npos3:52uM ATP\npos4: 17uM ATP\npos5:0uM ATP",
+    "Height": 1200,
+    "GridColumn": 0,
+    "Prefix": "2021-01-13_nocamera_dark_1",
+    "PixelSize_um": 0.2942,
+    "Frames": 1,
+    "CameraTimeout": 20000,
+    "BitDepth": 16,
+    "KeepShutterOpenChannels": false,
+    "Source": "Micro-Manager",
+    "Channels": 1,
+    "ComputerName": "DESKTOP-29GP4P3",
+    "CustomIntervals_ms": [],
+    "KeepShutterOpenSlices": true,
+    "ChColors": [-256],
+    "TimeFirst": false,
+    "ChContrastMax": [65536],
+    "Positions": 6,
+    "Directory": "E:\\"
+  },
+  "Source": "Blackfly BFLY-U3-23S6M_17290364",
+  "Arduino-Hub-Logic": "Normal",
+  "COM8-DataBits": "8",
+  "COM3-Name": "COM3",
+  "Blackfly BFLY-U3-23S6M_17290364-Vendor Name": "Point Grey Research",
+  "ZStage-Acceleration": "99",
+  "Arduino-Shutter-OnOff": "1",
+  "Arduino-Hub-Name": "Arduino-Hub",
+  "Blackfly BFLY-U3-23S6M_17290364-Sensor Info": "Sony IMX249 (1/1.2\" Mono CMOS)",
+  "COM3-DataBits": "8",
+  "Blackfly BFLY-U3-23S6M_17290364-Maximum Bus Speed": "s5000",
+  "Blackfly BFLY-U3-23S6M_17290364-TransposeCorrection": "0",
+  "XYStage-Description": "Prior XY stage driver adapter",
+  "Blackfly BFLY-U3-23S6M_17290364-Firmware Version": "1.8.3.0",
+  "Binning": "1",
+  "Blackfly BFLY-U3-23S6M_17290364-Driver Name": "USB Camera Driver (PGRUsbCam.sys) - 2.7.3.84",
+  "Blackfly BFLY-U3-23S6M_17290364-Format 7 Mode for binning 4": "Not set",
+  "Arduino-Switch-HubID": "",
+  "Blackfly BFLY-U3-23S6M_17290364-Format 7 Mode for binning 1": "Not set",
+  "Blackfly BFLY-U3-23S6M_17290364-Format 7 Mode for binning 2": "Not set",
+  "COM3-DelayBetweenCharsMs": "0.0000",
+  "XYStage-SCurve": "100",
+  "PixelType": "GRAY16",
+  "COM1-DelayBetweenCharsMs": "0.0000",
+  "TE2000-Port": "COM1",
+  "Blackfly BFLY-U3-23S6M_17290364-Sharpness": "512",
+  "Arduino-Shutter-HubID": "",
+  "Blackfly BFLY-U3-23S6M_17290364-Sharpness-AutoOrManual": "Manual",
+  "COM7-Name": "COM7",
+  "COM8-StopBits": "1",
+  "COM7-DataBits": "8",
+  "COM3-Description": "Serial port driver (boost:asio)",
+  "COM8-Verbose": "0",
+  "Arduino-Switch-Name": "Arduino-Switch",
+  "YPositionUm": -4401,
+  "COM3-Parity": "None",
+  "COM1-BaudRate": "9600",
+  "Blackfly BFLY-U3-23S6M_17290364-Gain(dB)": "0.0000",
+  "XYStage-TransposeMirrorY": "0",
+  "XPositionUm": -2133,
+  "Blackfly BFLY-U3-23S6M_17290364-TransposeXY": "0",
+  "XYStage-TransposeMirrorX": "0",
+  "Arduino-Hub-Port": "COM8",
+  "Blackfly BFLY-U3-23S6M_17290364-PixelType": "16-bit",
+  "FileName": "img_000000000_Proj_GFP_000.tif",
+  "XYStage-Acceleration": "100",
+  "COM8-Description": "Serial port driver (boost:asio)",
+  "Core-Galvo": "",
+  "COM3-BaudRate": "9600",
+  "Position": "Default",
+  "COM8-BaudRate": "57600",
+  "COM1-Name": "COM1",
+  "COM8-Handshaking": "Off",
+  "GenericSLM-TestModeHeight": "800",
+  "Arduino-Switch-Description": "Arduino digital output driver",
+  "GenericSLM-Description": "SLM controlled by computer display adapter output",
+  "CameraChannelIndex": 0,
+  "SliceIndex": 0,
+  "ZPositionUm": 394.3,
+  "Arduino-Switch-Sequence": "Off"
+}
+}
