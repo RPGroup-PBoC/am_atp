@@ -1,0 +1,12 @@
+{
+  "Channels": [{
+    "Name": "Proj_GFP",
+    "DisplayMode": 1,
+    "HistogramMax": 8191,
+    "Max": 3397,
+    "Gamma": 1,
+    "Min": 2031,
+    "Color": -256
+  }],
+  "Comments": {"Summary": "Standard EM, 1ul 1;1iATP, 2ul M2B 6.8 pad\npos0:1410uM ATP\npos1:470uM ATP\npos2:157uM ATP\npos3:52uM ATP\npos4: 17uM ATP\npos5:0uM ATP"}
+}
