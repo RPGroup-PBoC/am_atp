@@ -17,3 +17,45 @@ Aster Assays with NCD motors,Ncd_Aster_assay_12-12-2023,20sInterval_0.2uM_NCD_di
 ,,20sInterval_0.6uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2,20sInterval_0.6uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos0.ome,GOOD (weird exposure)
 ,,,20sInterval_0.6uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos1.ome,GOOD (weird exposure)
 ,,,20sInterval_0.6uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos2.ome,GOOD (weird exposure)
+,Ncd_Aster_assay_12-07-2023,20sInterval_0.2uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1,20sInterval_0.2uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos0.ome,GOOD
+,,,20sInterval_0.2uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos1.ome,GOOD
+,,,20sInterval_0.2uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos2.ome,GOOD
+,,20sInterval_0.3uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1,20sInterval_0.3uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos0.ome,GOOD (stunning as gabe says)
+,,,20sInterval_0.3uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos1.ome,GOOD
+,,,20sInterval_0.3uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos2.ome,GOOD
+,,20sInterval_0.5uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1,20sInterval_0.5uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos0.ome,GOOD (out of focus at the end)
+,,,20sInterval_0.5uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos1.ome,GOOD (slightly blurry)
+,,,20sInterval_0.5uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos2.ome,GOOD (kinda blurry though)
+,,20sInterval_0.6uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1,20sInterval_0.6uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos0.ome,GOOD
+,,,20sInterval_0.6uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos1.ome,GOOD
+,,,20sInterval_0.6uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos2.ome,GOOD
+,,20sInterval_0.6uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2,20sInterval_0.6uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos0.ome,GOOD
+,,,20sInterval_0.6uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos1.ome,GOOD
+,,,20sInterval_0.6uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos2.ome,GOOD
+,,20sInterval_0.15uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2,20sInterval_0.15uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos0.ome,Asterettes
+,,,20sInterval_0.15uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos1.ome,Asterettes
+,,,20sInterval_0.15uM_Ncd_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos2.ome,Asterettes
+,Ncd_Aster_assay_12-11-2023,20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1,20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos0.ome,out of focus
+,,,20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos1.ome,out of focus
+,,,20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos2.ome,out of focus
+,,20sInterval_0.3uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1,20sInterval_0.3uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos0.ome,blurry 
+,,,20sInterval_0.3uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos1.ome,blurry
+,,,20sInterval_0.3uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos2.ome,blurry
+,,20sInterval_0.6uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1,20sInterval_0.6uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos0.ome,GOOD (slightly blurry)
+,,,20sInterval_0.6uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos1.ome,GOOD (last few frames slightly blurry)
+,,,20sInterval_0.6uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos2.ome,GOOD
+,,20sInterval_0.75uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1,20sInterval_0.75uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos0.ome,GOOD (pulling background largeee)
+,,,20sInterval_0.75uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos1.ome,GOOD (pulling background largeee)
+,,,20sInterval_0.75uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos2.ome,GOOD (pulling background largeee)
+,,20sInterval_0.75uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2,20sInterval_0.75uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos0.ome,GOOD (pulling background largeee)
+,,,20sInterval_0.75uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos1.ome,GOOD (pulling background largeee)
+,,,20sInterval_0.75uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos2.ome,GOOD (pulling background largeee)
+,,20sInterval_0.375uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1,20sInterval_0.375uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos0.ome,out of focus (bad)
+,,,20sInterval_0.375uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos1.ome,out of focus (bad)
+,,,20sInterval_0.375uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos2.ome,out of focus (bad)
+,,20sInterval_0.375uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2,20sInterval_0.375uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos0.ome,GOOD
+,,,20sInterval_0.375uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos1.ome,GOOD
+,,,20sInterval_0.375uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_2_MMStack_Pos2.ome,GOOD
+,,20sInterval_0.375uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_3,20sInterval_0.375uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_3_MMStack_Pos0.ome,GOOD
+,,,20sInterval_0.375uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_3_MMStack_Pos1.ome,GOOD
+,,,20sInterval_0.375uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_3_MMStack_Pos2.ome,GOOD
