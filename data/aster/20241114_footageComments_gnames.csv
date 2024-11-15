@@ -1,4 +1,4 @@
-parent,,FILE,Position,Note
+parent,child,FILE,Position,Note
 Aster Assays with NCD motors,Ncd_Aster_assay_12-12-2023,20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1,20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos0.ome,out of focus
 Aster Assays with NCD motors,Ncd_Aster_assay_12-12-2023,20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1,20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos1.ome,out of focus
 Aster Assays with NCD motors,Ncd_Aster_assay_12-12-2023,20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1,20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_1_MMStack_Pos2.ome,out of focus
