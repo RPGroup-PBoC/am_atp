@@ -1,0 +1,3 @@
+../../data/aster/Ncd_Aster_assay_12-12-2023/20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_3/20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_3_MMStack_Pos1.ome.tif 20241116_154435
+../../data/aster/Ncd_Aster_assay_12-12-2023/20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_3/20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_3_MMStack_Pos2.ome.tif 20241116_154608
+../../data/aster/Ncd_Aster_assay_12-12-2023/20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_3/20sInterval_0.2uM_NCD_dimers_500uMATP_1.3uM_tubulin_2.8uM_A81D_3_MMStack_Pos0.ome.tif 20241116_154922
