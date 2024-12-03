@@ -245,40 +245,53 @@ def rsqrd(data, fit):
     sstot = np.sum((data-np.average(data))**2)
     return 1 - ssres/sstot
 
-def analyze_hydrolysis(bound_files, unbound_files, frame_int, skip_int, cal_params, p0, Motconc, bound_bg=1914, unbound_bg=1914):
+def grab_dark_avg(file_path_dark):
+    """
+    Imports a dark image.
+ 
+    Parameters:
+    file_path_dark (string): Data path for a dark image.
+    
+    Returns:
+    dark_avg (numpy.ndarray): Dark image as a 2D array.
+    """
+    dark_files = np.sort(glob.glob(file_path_dark))
+    dark_ims = np.array([skimage.io.imread(image_location) for image_location in dark_files]); 
+    dark_avg = np.average(dark_ims, axis=0)
+    return dark_avg
+
+def analyze_hydrolysis(bound_images, unbound_images, frame_int, skip_int, cal_params, p0, Motconc):
     """
         Analyzes tiff files
 
         Input: 
-        bound_files:    List of location of tiff files of bound channel.
-        unbound_files:  List of location of tiff files of bound channel.
+        bound_images:    List of tiff files of bound channel.
+        unbound_images:  List of tiff files of bound channel.
         frame_int:      Frame Interval (in seconds).
         skip_int:       Number of images to skip. Used for large datasets.
         cal_params:     Callibration parameters [Km, Rmax (max ratio), Rmin (min ratio), n (exponent)]
         p0:             Initial guess for fitting exponential curve to data.
         Motconc:        Motor concentration used in experiments.
-        bound_bg:       Camera offset in tiff files for bound channel.
-        unbound_bg:     Camera offset in tiff files for unbound channel.
     """
     print("start")
-
-    max_index = 100; 
-
-    # Convert files to images and save as array:
-    bound_array = file_to_image(bound_files[:max_index])
-    unbound_array = file_to_image(unbound_files[:max_index])
-
+    print(type(bound_images[0]))
+    # Read dark background images and obtain average to later subtract
+    dark_avg = grab_dark_avg('../../data/dark_ims/2021-01-13_nocamera_dark_1/*Pos*/*tif*'); 
+    
+    print("dark_avg")
     # Subtract background from all calibration images
-    bound_bs = bound_array - bound_bg
-    unbound_bs = unbound_array - unbound_bg
+    bound_bs = bound_images - dark_avg
+    unbound_bs = unbound_images - dark_avg
+
+    return bound_bs, unbound_bs
 
     # set negative values to zero
     unbound_bs[unbound_bs<0] = 0
     bound_bs[bound_bs<0] = 0
     
     # Find the normalization matrix
-    bound_norm_mat = norm_mat_fn_iATP(bound_array[-1], bound_bg)
-    unbound_norm_mat = norm_mat_fn_iATP(unbound_array[-1], unbound_bg)
+    bound_norm_mat = norm_mat_fn_iATP(bound_array[-1], dark_avg)
+    unbound_norm_mat = norm_mat_fn_iATP(unbound_array[-1], dark_avg)
     
     # Normalize all the calibration images by multiplying by the normalization matrix
     bound_norm = bound_bs*bound_norm_mat

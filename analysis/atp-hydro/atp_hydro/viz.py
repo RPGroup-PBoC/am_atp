@@ -8,7 +8,7 @@ from os.path import expanduser
 home = expanduser("~")
 
 # Add font
-font_dir = home+'/Library/Fonts/Lucida_Sans_Unicode.ttf'
+# font_dir = home+'/Library/Fonts/Lucida_Sans_Unicode.ttf'
 # font_manager.fontManager.addfont(font_dir)
 
 # Seaborn, useful for graphics
