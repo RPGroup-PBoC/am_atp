@@ -131,6 +131,10 @@ dmypy.json
 # Data folder
 data/
 analyzed_data/aster/
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 8db9ca83910e8676046d493cba79c63e24710f75
 #.DS_Store files which are Mac's tracking of folder positions
 **/.DS_Store
